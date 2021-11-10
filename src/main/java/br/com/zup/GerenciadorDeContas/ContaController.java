@@ -1,6 +1,7 @@
 package br.com.zup.GerenciadorDeContas;
 
 import br.com.zup.GerenciadorDeContas.DTOS.ContaCadastroDto;
+import br.com.zup.GerenciadorDeContas.DTOS.ContaRespostaDto;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,13 @@ public class ContaController {
     @Autowired
     private ModelMapper modelMapper;
 
-
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ContaRespostaDto CadastrarConta(@RequestBody ContaCadastroDto contaCadastroDto){
+        Conta conta = modelMapper.map(contaCadastroDto, Conta.class);
+        contaService.salvarConta(conta);
+        ContaRespostaDto contaRespostaDto = modelMapper.map(conta, ContaRespostaDto.class);
+        return contaRespostaDto;
+    }
 
 }

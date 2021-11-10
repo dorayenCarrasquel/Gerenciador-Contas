@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ContaService {
@@ -15,7 +16,6 @@ public class ContaService {
         LocalDate dataCadastro = LocalDate.now();
         if (conta.getDataDeVencimento().isBefore(dataCadastro)){
             conta.setStatus(Status.VENCIDA);
-
         }
         else {
             conta.setStatus(Status.AGUARDANDO);
@@ -23,5 +23,11 @@ public class ContaService {
 
         return contaRepository.save(conta);
     }
+
+    public List<Conta> exibirTodasAsContas(){
+        List<Conta>contas = (List<Conta>) contaRepository.findAll();
+        return contas;
+    }
+
 
 }

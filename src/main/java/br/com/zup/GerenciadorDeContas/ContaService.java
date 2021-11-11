@@ -3,9 +3,9 @@ package br.com.zup.GerenciadorDeContas;
 import br.com.zup.GerenciadorDeContas.Enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +30,7 @@ public class ContaService {
         return contas;
     }
 
-    public Conta BuscarporId(int id){
+    public Conta buscarporId(int id){
         Optional<Conta> contaOptional = contaRepository.findById(id);
         if(contaOptional.isEmpty()){
             throw new RuntimeException("Id não encontrado");
@@ -38,19 +38,13 @@ public class ContaService {
         return contaOptional.get();
     }
 
+    public Conta atualizarConta (int id){
+        Conta conta = buscarporId(id);
+        conta.setStatus(Status.PAGO);
+        conta.setDataDePagamento(LocalDateTime.now());
+        contaRepository.save(conta);
 
+        return conta;
+    }
 
-
-
-//https://www.baeldung.com/spring-optional-path-variables
-
-    /* @GetMapping("/{id}")
-
-    public PersonDTO findById(@PathVariable Long id)
-
-     throws PersonNotFoundExcepition {
-
-        return personService.findById(id);
-
-    }*/
 }

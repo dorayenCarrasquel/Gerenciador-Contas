@@ -2,18 +2,18 @@ package br.com.zup.GerenciadorDeContas.DTOS;
 
 import br.com.zup.GerenciadorDeContas.Enums.Tipo;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 
 public class ContaCadastroDto {
-    @NotBlank
+    @NotBlank(message = "O nome debe ser preenchido")
     private String nome;
-    @Min(value = 1, message = "O minimo não poder ser menor que 0")
+    @Positive(message = "O valor debe ser positivo")
     private double valor;
     private Tipo tipo;
-    @NotNull
+    @NotNull(message = "A Data de Vencimento debe ser prenchida")
     private LocalDate dataDeVencimento;
 
     public ContaCadastroDto() {

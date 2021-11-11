@@ -1,6 +1,7 @@
 package br.com.zup.GerenciadorDeContas.config;
 
 import br.com.zup.GerenciadorDeContas.Exceptions.IdNaoEncontradoException;
+import br.com.zup.GerenciadorDeContas.Exceptions.ImpossivelPoisJaEstaPagoException;
 import br.com.zup.GerenciadorDeContas.Exceptions.StatusNaoModificableException;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -35,6 +36,12 @@ public class ControladorAdvisor {
     @ExceptionHandler(StatusNaoModificableException.class)//Erro digitaçao do Status fora do esperado, "PAGO"
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public MensagemDeErro manipularExceptionComOStatusNaoPermitido(StatusNaoModificableException exception){
+        return new MensagemDeErro(exception.getMessage());
+    }
+
+    @ExceptionHandler(ImpossivelPoisJaEstaPagoException.class)
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public MensagemDeErro manipularPagojaAtualizado(ImpossivelPoisJaEstaPagoException exception){
         return new MensagemDeErro(exception.getMessage());
     }
 

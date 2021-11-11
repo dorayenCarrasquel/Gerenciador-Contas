@@ -5,6 +5,7 @@ import br.com.zup.GerenciadorDeContas.DTOS.ContaCadastroDto;
 import br.com.zup.GerenciadorDeContas.DTOS.ContaRespostaDto;
 import br.com.zup.GerenciadorDeContas.DTOS.ResumoDto;
 import br.com.zup.GerenciadorDeContas.Enums.Status;
+import br.com.zup.GerenciadorDeContas.Exceptions.StatusNaoModificableException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -57,9 +58,11 @@ public class ContaController {
 
             return contaRespostaDto;
         }
-            throw new RuntimeException("Impossivel modificar");
+            throw new StatusNaoModificableException("Campo Impossivel de modificar");
 
     }
+
+
 
 
 }

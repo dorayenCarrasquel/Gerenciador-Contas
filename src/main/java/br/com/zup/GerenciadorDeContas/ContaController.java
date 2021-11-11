@@ -61,7 +61,12 @@ public class ContaController {
             throw new StatusNaoModificableException("Campo Impossivel de modificar");
 
     }
+    @GetMapping("/{id}")
+    public ContaRespostaDto exibirContaPorId(@PathVariable int id){
+        ContaRespostaDto contaRespostaDto = modelMapper.map(contaService.buscarporId(id), ContaRespostaDto.class);
 
+        return contaRespostaDto;
+    }
 
 
 

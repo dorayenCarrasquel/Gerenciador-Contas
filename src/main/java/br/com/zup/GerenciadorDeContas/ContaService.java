@@ -2,6 +2,7 @@ package br.com.zup.GerenciadorDeContas;
 
 import br.com.zup.GerenciadorDeContas.Enums.Status;
 import br.com.zup.GerenciadorDeContas.Exceptions.IdNaoEncontradoException;
+import br.com.zup.GerenciadorDeContas.Exceptions.ImpossivelPoisJaEstaPagoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,14 +17,23 @@ public class ContaService {
     private ContaRepository contaRepository;
 
     public Conta salvarConta(Conta conta) {
+        verificarConta(conta);
+        return contaRepository.save(conta);
+    }
+
+    public void verificarConta(Conta conta) {
         LocalDate dataCadastro = LocalDate.now();
         if (conta.getDataDeVencimento().isBefore(dataCadastro)) {
             conta.setStatus(Status.VENCIDA);
         } else {
             conta.setStatus(Status.AGUARDANDO);
         }
-
-        return contaRepository.save(conta);
+    }
+    public void verificarContaPaga(Conta conta){
+        if (conta.getStatus()== Status.PAGO){
+            throw new ImpossivelPoisJaEstaPagoException("Impossivel continuar, o Pago de essa conta já foi efetivado");
+        }
+        conta.setStatus(Status.PAGO);
     }
 
     public List<Conta> exibirTodasAsContas() {
@@ -41,7 +51,7 @@ public class ContaService {
 
     public Conta atualizarConta(int id) {
         Conta conta = buscarporId(id);
-        conta.setStatus(Status.PAGO);
+        verificarContaPaga(conta);
         conta.setDataDePagamento(LocalDateTime.now());
         contaRepository.save(conta);
 

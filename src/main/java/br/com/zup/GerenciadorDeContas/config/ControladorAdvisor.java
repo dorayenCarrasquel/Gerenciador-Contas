@@ -3,7 +3,9 @@ package br.com.zup.GerenciadorDeContas.config;
 import br.com.zup.GerenciadorDeContas.Exceptions.IdNaoEncontradoException;
 import br.com.zup.GerenciadorDeContas.Exceptions.ImpossivelPoisJaEstaPagoException;
 import br.com.zup.GerenciadorDeContas.Exceptions.StatusNaoModificableException;
+import org.springframework.boot.json.JsonParseException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -43,6 +45,12 @@ public class ControladorAdvisor {
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     public MensagemDeErro manipularPagojaAtualizado(ImpossivelPoisJaEstaPagoException exception){
         return new MensagemDeErro(exception.getMessage());
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public MensagemDeErro manipularErroDeSintaxisDoCliente (HttpMessageNotReadableException exception){
+        return new MensagemDeErro("Precisa completar os campos");
     }
 
 }

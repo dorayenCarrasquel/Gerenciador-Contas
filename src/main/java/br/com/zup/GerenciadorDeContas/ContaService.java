@@ -78,4 +78,10 @@ public class ContaService {
                 return contaRepository.findContasByValor(valor);
     }
 
+    public void deletarConta(int id){
+        Conta conta = buscarporId(id);
+        contaRepository.delete(conta);
+    }
+
+
 }

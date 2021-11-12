@@ -37,11 +37,13 @@ public class ContaService {
         conta.setStatus(Status.PAGO);
     }
 
-    public List<Conta> exibirTodasAsContas(Status status, Tipo tipo) {
+    public List<Conta> exibirTodasAsContas(Status status, Tipo tipo, Double valor) {
         if (status != null){
             return buscarPorStatus(status);
         }else if (tipo != null){
             return buscarPorTipo(tipo);
+        }else if (valor != null ){
+            return buscarPorRangoDeValor(valor);
         }
         List<Conta> contas = (List<Conta>) contaRepository.findAll();
         return contas;
@@ -70,6 +72,10 @@ public class ContaService {
 
     public List<Conta> buscarPorTipo(Tipo tipo){
         return contaRepository.findAllByTipo(tipo);
+    }
+
+    public List<Conta> buscarPorRangoDeValor(Double valor){
+                return contaRepository.findContasByValor(valor);
     }
 
 }

@@ -50,7 +50,7 @@ public class ControladorAdvisor {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public MensagemDeErro manipularErroDeSintaxisDoCliente (HttpMessageNotReadableException exception){
-        return new MensagemDeErro("Precisa completar os campos");
+        return new MensagemDeErro("Tem algumos erros de ESCRITA,  la CAUSA é ==>  " + exception.getMostSpecificCause());
     }
 
 }

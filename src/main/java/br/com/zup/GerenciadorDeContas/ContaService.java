@@ -36,7 +36,10 @@ public class ContaService {
         conta.setStatus(Status.PAGO);
     }
 
-    public List<Conta> exibirTodasAsContas() {
+    public List<Conta> exibirTodasAsContas(Status status) {
+        if (status != null){
+            return buscarPorStatus(status);
+        }
         List<Conta> contas = (List<Conta>) contaRepository.findAll();
         return contas;
     }
@@ -56,6 +59,10 @@ public class ContaService {
         contaRepository.save(conta);
 
         return conta;
+    }
+
+    public List<Conta> buscarPorStatus(Status status){
+        return contaRepository.findAllByStatus(status);
     }
 
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,10 +42,12 @@ public class ContaController {
     }
 
     @GetMapping
-    public List<ResumoDto> exibirLista() {
+    public List<ResumoDto> exibirLista(@RequestParam(required = false) Status status) {
         List<ResumoDto> listaDeExibicao = new ArrayList<>();
-        for (Conta conta : contaService.exibirTodasAsContas()) {
-            listaDeExibicao.add(new ResumoDto(conta.getId(), conta.getNome(), conta.getValor(), conta.getStatus()));
+
+        for (Conta conta : contaService.exibirTodasAsContas(status)) {
+            ResumoDto resumoDto = modelMapper.map(conta, ResumoDto.class);
+            listaDeExibicao.add(resumoDto);
         }
         return listaDeExibicao;
 
@@ -67,6 +70,8 @@ public class ContaController {
 
         return contaRespostaDto;
     }
+
+
 
 
 

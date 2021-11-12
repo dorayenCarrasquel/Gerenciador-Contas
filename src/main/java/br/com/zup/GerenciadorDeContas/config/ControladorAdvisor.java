@@ -50,7 +50,7 @@ public class ControladorAdvisor {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public MensagemDeErro manipularErroDeSintaxisDoCliente (HttpMessageNotReadableException exception){
-        return new MensagemDeErro("Tem algumos erros de ESCRITA,  la CAUSA é ==>  " + exception.getMostSpecificCause());
+        return new MensagemDeErro("Tem algumos erros de ESCRITA");
     }
 
 }

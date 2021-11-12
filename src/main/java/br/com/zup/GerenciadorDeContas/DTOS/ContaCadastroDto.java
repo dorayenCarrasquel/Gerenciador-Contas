@@ -5,13 +5,16 @@ import br.com.zup.GerenciadorDeContas.Enums.Tipo;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class ContaCadastroDto {
     @NotBlank(message = "O nome debe ser preenchido")
+    @Size(min = 2, max = 30, message = "O nome debe conter entre 2 e 30 caracteres")
     private String nome;
     @Positive(message = "O valor debe ser positivo")
     private double valor;
+    @NotNull(message = "O tipo precisa ser preenchido")
     private Tipo tipo;
     @NotNull(message = "A Data de Vencimento debe ser prenchida")
     private LocalDate dataDeVencimento;

@@ -1,6 +1,7 @@
 package br.com.zup.GerenciadorDeContas;
 
 import br.com.zup.GerenciadorDeContas.Enums.Status;
+import br.com.zup.GerenciadorDeContas.Enums.Tipo;
 import br.com.zup.GerenciadorDeContas.Exceptions.IdNaoEncontradoException;
 import br.com.zup.GerenciadorDeContas.Exceptions.ImpossivelPoisJaEstaPagoException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +37,11 @@ public class ContaService {
         conta.setStatus(Status.PAGO);
     }
 
-    public List<Conta> exibirTodasAsContas(Status status) {
+    public List<Conta> exibirTodasAsContas(Status status, Tipo tipo) {
         if (status != null){
             return buscarPorStatus(status);
+        }else if (tipo != null){
+            return buscarPorTipo(tipo);
         }
         List<Conta> contas = (List<Conta>) contaRepository.findAll();
         return contas;
@@ -63,6 +66,10 @@ public class ContaService {
 
     public List<Conta> buscarPorStatus(Status status){
         return contaRepository.findAllByStatus(status);
+    }
+
+    public List<Conta> buscarPorTipo(Tipo tipo){
+        return contaRepository.findAllByTipo(tipo);
     }
 
 }

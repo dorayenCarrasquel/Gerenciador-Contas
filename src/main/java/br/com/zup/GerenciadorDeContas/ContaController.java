@@ -5,6 +5,7 @@ import br.com.zup.GerenciadorDeContas.DTOS.ContaCadastroDto;
 import br.com.zup.GerenciadorDeContas.DTOS.ContaRespostaDto;
 import br.com.zup.GerenciadorDeContas.DTOS.ResumoDto;
 import br.com.zup.GerenciadorDeContas.Enums.Status;
+import br.com.zup.GerenciadorDeContas.Enums.Tipo;
 import br.com.zup.GerenciadorDeContas.Exceptions.StatusNaoModificableException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +43,10 @@ public class ContaController {
     }
 
     @GetMapping
-    public List<ResumoDto> exibirLista(@RequestParam(required = false) Status status) {
+    public List<ResumoDto> exibirLista(@RequestParam(required = false) Status status, @RequestParam(required = false)Tipo tipo) {
         List<ResumoDto> listaDeExibicao = new ArrayList<>();
 
-        for (Conta conta : contaService.exibirTodasAsContas(status)) {
+        for (Conta conta : contaService.exibirTodasAsContas(status, tipo)) {
             ResumoDto resumoDto = modelMapper.map(conta, ResumoDto.class);
             listaDeExibicao.add(resumoDto);
         }

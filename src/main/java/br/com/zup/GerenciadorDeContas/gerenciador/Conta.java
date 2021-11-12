@@ -1,9 +1,7 @@
-package br.com.zup.GerenciadorDeContas;
+package br.com.zup.GerenciadorDeContas.gerenciador;
 
-import br.com.zup.GerenciadorDeContas.Enums.Status;
-import br.com.zup.GerenciadorDeContas.Enums.Tipo;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-import org.springframework.stereotype.Controller;
+import br.com.zup.GerenciadorDeContas.gerenciador.Enums.Status;
+import br.com.zup.GerenciadorDeContas.gerenciador.Enums.Tipo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

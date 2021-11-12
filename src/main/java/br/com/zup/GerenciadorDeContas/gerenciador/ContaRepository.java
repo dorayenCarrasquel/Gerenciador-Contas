@@ -1,7 +1,7 @@
-package br.com.zup.GerenciadorDeContas;
+package br.com.zup.GerenciadorDeContas.gerenciador;
 
-import br.com.zup.GerenciadorDeContas.Enums.Status;
-import br.com.zup.GerenciadorDeContas.Enums.Tipo;
+import br.com.zup.GerenciadorDeContas.gerenciador.Enums.Status;
+import br.com.zup.GerenciadorDeContas.gerenciador.Enums.Tipo;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import java.util.List;

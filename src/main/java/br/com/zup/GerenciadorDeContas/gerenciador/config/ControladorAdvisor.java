@@ -1,9 +1,8 @@
-package br.com.zup.GerenciadorDeContas.config;
+package br.com.zup.GerenciadorDeContas.gerenciador.config;
 
-import br.com.zup.GerenciadorDeContas.Exceptions.IdNaoEncontradoException;
-import br.com.zup.GerenciadorDeContas.Exceptions.ImpossivelPoisJaEstaPagoException;
-import br.com.zup.GerenciadorDeContas.Exceptions.StatusNaoModificableException;
-import org.springframework.boot.json.JsonParseException;
+import br.com.zup.GerenciadorDeContas.gerenciador.Exceptions.IdNaoEncontradoException;
+import br.com.zup.GerenciadorDeContas.gerenciador.Exceptions.ImpossivelPoisJaEstaPagoException;
+import br.com.zup.GerenciadorDeContas.gerenciador.Exceptions.StatusNaoModificableException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;

@@ -1,6 +1,6 @@
-package br.com.zup.GerenciadorDeContas.DTOS;
+package br.com.zup.GerenciadorDeContas.gerenciador.DTOS;
 
-import br.com.zup.GerenciadorDeContas.Enums.Tipo;
+import br.com.zup.GerenciadorDeContas.gerenciador.Enums.Tipo;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

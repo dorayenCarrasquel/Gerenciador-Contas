@@ -1,7 +1,7 @@
-package br.com.zup.GerenciadorDeContas.DTOS;
+package br.com.zup.GerenciadorDeContas.gerenciador.DTOS;
 
-import br.com.zup.GerenciadorDeContas.Enums.Status;
-import br.com.zup.GerenciadorDeContas.Enums.Tipo;
+import br.com.zup.GerenciadorDeContas.gerenciador.Enums.Status;
+import br.com.zup.GerenciadorDeContas.gerenciador.Enums.Tipo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;

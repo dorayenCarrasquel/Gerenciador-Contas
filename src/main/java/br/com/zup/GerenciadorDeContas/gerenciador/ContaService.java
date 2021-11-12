@@ -1,9 +1,9 @@
-package br.com.zup.GerenciadorDeContas;
+package br.com.zup.GerenciadorDeContas.gerenciador;
 
-import br.com.zup.GerenciadorDeContas.Enums.Status;
-import br.com.zup.GerenciadorDeContas.Enums.Tipo;
-import br.com.zup.GerenciadorDeContas.Exceptions.IdNaoEncontradoException;
-import br.com.zup.GerenciadorDeContas.Exceptions.ImpossivelPoisJaEstaPagoException;
+import br.com.zup.GerenciadorDeContas.gerenciador.Enums.Status;
+import br.com.zup.GerenciadorDeContas.gerenciador.Enums.Tipo;
+import br.com.zup.GerenciadorDeContas.gerenciador.Exceptions.IdNaoEncontradoException;
+import br.com.zup.GerenciadorDeContas.gerenciador.Exceptions.ImpossivelPoisJaEstaPagoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

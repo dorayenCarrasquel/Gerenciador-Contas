@@ -1,6 +1,6 @@
-package br.com.zup.GerenciadorDeContas.DTOS;
+package br.com.zup.GerenciadorDeContas.gerenciador.DTOS;
 
-import br.com.zup.GerenciadorDeContas.Enums.Status;
+import br.com.zup.GerenciadorDeContas.gerenciador.Enums.Status;
 
 public class ResumoDto {
     private int id;

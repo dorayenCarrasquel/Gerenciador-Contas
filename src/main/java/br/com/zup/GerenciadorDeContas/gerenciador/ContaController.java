@@ -1,15 +1,18 @@
-package br.com.zup.GerenciadorDeContas;
+package br.com.zup.GerenciadorDeContas.gerenciador;
 
-import br.com.zup.GerenciadorDeContas.DTOS.ContaAtualizarDto;
-import br.com.zup.GerenciadorDeContas.DTOS.ContaCadastroDto;
-import br.com.zup.GerenciadorDeContas.DTOS.ContaRespostaDto;
-import br.com.zup.GerenciadorDeContas.DTOS.ResumoDto;
-import br.com.zup.GerenciadorDeContas.Enums.Status;
-import br.com.zup.GerenciadorDeContas.Enums.Tipo;
-import br.com.zup.GerenciadorDeContas.Exceptions.StatusNaoModificableException;
+import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.ContaAtualizarDto;
+import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.ContaCadastroDto;
+import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.ContaRespostaDto;
+import br.com.zup.GerenciadorDeContas.gerenciador.DTOS.ResumoDto;
+import br.com.zup.GerenciadorDeContas.gerenciador.Enums.Status;
+import br.com.zup.GerenciadorDeContas.gerenciador.Enums.Tipo;
+import br.com.zup.GerenciadorDeContas.gerenciador.Exceptions.StatusNaoModificableException;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +30,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/contas")
+@Api(value = "Gerenciador de contas")
+@CrossOrigin(origins = "*")
 public class ContaController {
     @Autowired
     private ContaService contaService;
@@ -35,6 +40,7 @@ public class ContaController {
     private ModelMapper modelMapper;
 
     @PostMapping
+    @ApiOperation(value = "Método para cadastrar uma conta")
     @ResponseStatus(HttpStatus.CREATED)
     public ContaRespostaDto CadastrarConta(@RequestBody @Valid ContaCadastroDto contaCadastroDto) {
         Conta conta = modelMapper.map(contaCadastroDto, Conta.class);
@@ -44,6 +50,7 @@ public class ContaController {
     }
 
     @GetMapping
+    @ApiOperation(value = "Método Utilizzado para mapear as busquedas com o sem parámetro")
     public List<ResumoDto> exibirLista(@RequestParam(required = false) Status status, @RequestParam(required = false)Tipo tipo, @RequestParam(required = false) Double valor) {
         List<ResumoDto> listaDeExibicao = new ArrayList<>();
 
@@ -56,8 +63,9 @@ public class ContaController {
     }
 
     @PutMapping("/{id}")
+    @ApiOperation(value = "Método para atualizar uma conta por id")
     @ResponseStatus(HttpStatus.OK)
-    public ContaRespostaDto atualizarConta(@PathVariable int id, @RequestBody ContaAtualizarDto contaAtualizarDto) {
+    public ContaRespostaDto atualizarConta(@Valid @PathVariable int id, @RequestBody ContaAtualizarDto contaAtualizarDto) {
         if (contaAtualizarDto.getStatus() == Status.PAGO) {
             ContaRespostaDto contaRespostaDto = modelMapper.map(contaService.atualizarConta(id), ContaRespostaDto.class);
 
@@ -67,6 +75,7 @@ public class ContaController {
 
     }
     @GetMapping("/{id}")
+    @ApiOperation(value = "Método para exibir por id")
     public ContaRespostaDto exibirContaPorId(@PathVariable int id){
         ContaRespostaDto contaRespostaDto = modelMapper.map(contaService.buscarporId(id), ContaRespostaDto.class);
 
@@ -74,6 +83,7 @@ public class ContaController {
     }
 
     @DeleteMapping("/{id}")
+    @ApiOperation(value = "Método para deletar uma conta usando como parámentro o id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarConta(@PathVariable int id){
         contaService.deletarConta(id);
